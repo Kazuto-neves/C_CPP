@@ -22,7 +22,6 @@ case 'D':
         x +=0.010f;
         r +=0.010f;
     }
-    //x +=0.010f;
     break;
 case 'a':
 case 'A':
@@ -40,8 +39,6 @@ void circulo(float sx,float sy,float tx,float ty,float r,float g,float b)
     glLoadIdentity();
     glTranslatef(tx,ty,0.0f);
     glScalef(sx,sy,0.0f);
-    //glTranslatef(0.70f, 0.50f, 0.0f);
-    //glScalef(0.15, 0.30f, 0.0f);
     double ang1 = 2*  M_PI/100 ;
     glPolygonMode( GL_FRONT, GL_FILL );
     glColor3f(r,g,b);
@@ -87,8 +84,6 @@ void pCaca()
 
 void porta()
 {
-    glPopMatrix();
-    glFlush();
     glPushMatrix();
     glLoadIdentity();
     glTranslatef(-0.150f, 0.10f, 0.0f);
@@ -141,8 +136,6 @@ void telhado()
 
 void Poste1()
 {
-    glPopMatrix();
-    glFlush();
     glPushMatrix();
     glLoadIdentity();
     glTranslatef(-0.850f, 0.10f, 0.0f);
@@ -159,8 +152,6 @@ void Poste1()
 
 void Poste2()
 {
-    glPopMatrix();
-    glFlush();
     glPushMatrix();
     glLoadIdentity();
     glTranslatef(-0.850f, 0.70f, 0.0f);
@@ -177,8 +168,6 @@ void Poste2()
 
 void luz()
 {
-    glPopMatrix();
-    glFlush();
     glPushMatrix();
     glLoadIdentity();
     glTranslatef(-0.650f, 0.68f, 0.0f);
@@ -195,8 +184,6 @@ void luz()
 
 void globo()
 {
-    glPopMatrix();
-    glFlush();
     glPushMatrix();
     glLoadIdentity();
     glTranslatef(-0.650f, 0.65f, 0.0f);
@@ -213,8 +200,6 @@ void globo()
 
 void tronco()
 {
-    glPopMatrix();
-    glFlush();
     glPushMatrix();
     glLoadIdentity();
     glTranslatef(0.600f, 0.10f, 0.0f);
