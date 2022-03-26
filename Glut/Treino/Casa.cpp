@@ -3,8 +3,33 @@
 #include <GL/freeglut.h>
 #include <stdlib.h>
 #include <cmath>
+#include <iostream>
+
+using namespace std;
 
 #define PI 3.1415926535
+
+float x = 0.300f;
+float X = 0.180f;
+
+static void teclaPressionado(unsigned char tecla,int posicaoX,int posicaoY)
+{
+    switch(tecla){
+case 'd':
+case 'D':
+    if(x<=1.76f || x>=0.26f){
+        x +=0.010f;
+    }
+    //x +=0.010f;
+    break;
+case 'a':
+case 'A':
+    if(x<=1.76f || x>=0.26f){
+        x-=0.010f;
+    }
+    }
+    glutPostRedisplay();
+}
 
 void inicia()
 {
@@ -224,6 +249,98 @@ void Faixa(float x){
     glFlush();
 }
 
+void carroceria(float x){
+    glPushMatrix();
+    glLoadIdentity();
+    glTranslatef(x, -0.50f, 0.0f);
+    glColor4ub(43,180,6,255);
+    glBegin(GL_QUADS);
+    glVertex3f(-1.1f, 0.1f, 0.0f);                          // Top Left
+    glVertex3f(-0.9f, 0.1f, 0.0f);                          // Top Right
+    glVertex3f(-0.9f,-0.1f, 0.0f);                          // Bottom Right
+    glVertex3f(-1.1f,-0.1f, 0.0f);
+    glEnd();
+    glPopMatrix();
+    glFlush();
+}
+
+void frenteTras(float x){
+    glPushMatrix();
+    glLoadIdentity();
+    glTranslatef(x, -0.50f, 0.0f);
+    glColor4ub(43,180,6,255);
+    glBegin(GL_QUADS);
+    glVertex3f(-1.2f, 0.0f, 0.0f);                          // Top Left
+    glVertex3f(-0.8f, 0.0f, 0.0f);                          // Top Right
+    glVertex3f(-0.8f,-0.1f, 0.0f);                          // Bottom Right
+    glVertex3f(-1.2f,-0.1f, 0.0f);
+    glEnd();
+    glPopMatrix();
+    glFlush();
+}
+
+void LanternaF(float x){
+    glPushMatrix();
+    glLoadIdentity();
+    glTranslatef(x, -0.50f, 0.0f);
+    glColor4ub(245,245,0,255);
+    glBegin(GL_QUADS);
+    glVertex3f(-0.8f, 0.0f, 0.0f);                          // Top Left
+    glVertex3f(-0.79f, 0.0f, 0.0f);                          // Top Right
+    glVertex3f(-0.79f,-0.1f, 0.0f);                          // Bottom Right
+    glVertex3f(-0.8f,-0.1f, 0.0f);
+    glEnd();
+    glPopMatrix();
+    glFlush();
+}
+
+void LanternaT(float x){
+    glPushMatrix();
+    glLoadIdentity();
+    glTranslatef(x, -0.50f, 0.0f);
+    glColor4ub(180,6,6,255);
+    glBegin(GL_QUADS);
+    glVertex3f(-1.2f, 0.0f, 0.0f);                          // Top Left
+    glVertex3f(-1.19f, 0.0f, 0.0f);                          // Top Right
+    glVertex3f(-1.19f,-0.1f, 0.0f);                          // Bottom Right
+    glVertex3f(-1.2f,-0.1f, 0.0f);
+    glEnd();
+    glPopMatrix();
+    glFlush();
+}
+
+void rodas(float x){
+    glPushMatrix();
+    glLoadIdentity();
+    glTranslatef(x, -0.60f, 0.0f);
+    glColor4ub(20,20,20,255);
+    glBegin(GL_QUADS);
+    glVertex3f(-1.2f, 0.0f, 0.0f);                          // Top Left
+    glVertex3f(-1.09f, 0.0f, 0.0f);                          // Top Right
+    glVertex3f(-1.09f,-0.1f, 0.0f);                          // Bottom Right
+    glVertex3f(-1.2f,-0.1f, 0.0f);
+    glEnd();
+    glPopMatrix();
+    glFlush();
+}
+
+void carro(float x){
+    carroceria(x);
+    frenteTras(x);
+    LanternaF(x);
+    LanternaT(x);
+    rodas(x+0.05);
+    rodas(x+0.25);
+}
+
+void faixas (float x){
+    float t=0.00f;
+    for(int i=0;i<4;i++){
+        Faixa(x+t);
+        t+=0.50f;
+    }
+}
+
 void desenha()
 {
     backf();
@@ -238,7 +355,8 @@ void desenha()
     tronco();
     arvore();
     Rua();
-    Faixa(0.180);
+    faixas(X);
+    carro(x);
 
 }
 
@@ -252,6 +370,7 @@ int main(int argc, char** argv)
     glutCreateWindow("Casa");
     inicia();
     glutDisplayFunc(desenha);
+    glutKeyboardFunc(teclaPressionado);
     glutMainLoop();
     return 0;
 
