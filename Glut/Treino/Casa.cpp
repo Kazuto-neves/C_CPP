@@ -363,9 +363,9 @@ int main(int argc, char** argv)
     glutInitWindowPosition(10,10);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
     glutCreateWindow("Casa");
+    glutKeyboardFunc(teclaPressionado);
     inicia();
     glutDisplayFunc(desenha);
-    glutKeyboardFunc(teclaPressionado);
     glutMainLoop();
     return 0;
 
