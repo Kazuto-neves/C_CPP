@@ -75,10 +75,24 @@ void pCaca()
     glTranslatef(-0.150f, 0.10f, 0.0f);
     glColor4ub(174,139,192,255);
     glBegin(GL_QUADS);
-    glVertex3f(-0.3f, 0.3f, 0.0f);                          // Top Left
-    glVertex3f( 0.3f, 0.3f, 0.0f);                          // Top Right
-    glVertex3f( 0.3f,-0.3f, 0.0f);                          // Bottom Right
-    glVertex3f(-0.3f,-0.3f, 0.0f);
+    glVertex3f(-0.3f, 0.35f, 0.0f);                          // Top Left
+    glVertex3f( 0.3f, 0.35f, 0.0f);                          // Top Right
+    glVertex3f( 0.3f,-0.35f, 0.0f);                          // Bottom Right
+    glVertex3f(-0.3f,-0.35f, 0.0f);
+    glEnd();
+}
+
+void placa()
+{
+    glPushMatrix();
+    glLoadIdentity();
+    glTranslatef(-0.150f, 0.33f, 0.0f);
+    glColor4ub(244, 190, 237,255);
+    glBegin(GL_QUADS);
+    glVertex3f(-0.3f, 0.1f, 0.0f);                          // Top Left
+    glVertex3f( 0.3f, 0.1f, 0.0f);                          // Top Right
+    glVertex3f( 0.3f,-0.1f, 0.0f);                          // Bottom Right
+    glVertex3f(-0.3f,-0.1f, 0.0f);
     glEnd();
 }
 
@@ -118,7 +132,7 @@ void telhado()
 {
     glPushMatrix();
     glLoadIdentity();
-    glTranslatef(-0.150f, 0.50f, 0.0f);
+    glTranslatef(-0.150f, 0.70f, 0.0f);
     glRotatef(300.0,160.0,1.0,0.0);
     glScalef(1.0,1.0,1.0);
     glBegin(GL_TRIANGLES);
@@ -314,8 +328,8 @@ void rodas(float x){
 }
 
 void moon(){
-    circulo(0.12,0.17,0.20f,0.70f,1, 0.94, 0.26);
-    circulo(0.12,0.17,0.25f,0.70f,0.09,0.11,0.25);
+    circulo(0.12,0.17,0.35f,0.75f,1, 0.94, 0.26);
+    circulo(0.12,0.17,0.40f,0.75f,0.09,0.11,0.25);
 }
 
 void carro(float x , float r){
@@ -335,10 +349,101 @@ void faixas (float x){
     }
 }
 
+void pontos(float x,float y)
+{
+    glColor3f(0.39f,0.09f,0.35f);
+    glPointSize(10);
+    glBegin(GL_POINTS);
+    glVertex2f(x,y);
+    glEnd();
+}
+
+void Letreiro(){
+    float x=-0.25,y=-0.60;
+
+    for(int i=0;i<=6;i++){
+        pontos(x,y);
+        y-=0.04;
+    }
+
+    for(int i=0;i<=6;i++){
+            pontos(x,y);
+            x+=0.01;
+    }
+
+    x= -0.13;   y= -0.60;
+
+    for(int i=0;i<=6;i++){
+        pontos(x,y);
+        y-=0.04;
+    }
+
+    for(int i=0;i<=6;i++){
+            y= -0.60;
+            pontos(x,y);
+            x+=0.01;
+    }
+
+    for(int i=0;i<=6;i++){
+        pontos(x,y);
+        y-=0.04;
+    }
+
+    for(int i=0;i<=7;i++){
+            pontos(x,y);
+            x-=0.01;
+    }
+
+    x=0.04;   y= -0.60;
+
+    for(int i=0;i<=6;i++){
+            y= -0.60;
+            pontos(x,y);
+            x+=0.01;
+    }
+
+    for(int i=0;i<=6;i++){
+        x= 0.07;
+        pontos(x,y);
+        y-=0.04;
+    }
+
+    for(int i=0;i<=4;i++){
+            pontos(x,y);
+            x-=0.01;
+    }
+
+    x=0.17; y= -0.60;
+
+    for(int i=0;i<=7;i++){
+        pontos(x,y);
+        y-=0.04;
+    }
+
+    for(int i=0;i<=6;i++){
+            y= -0.60;
+            pontos(x,y);
+            x+=0.01;
+    }
+
+    for(int i=0;i<=7;i++){
+        pontos(x,y);
+        y-=0.04;
+    }
+
+    for(int i=0;i<=7;i++){
+            y= -0.76;
+            pontos(x,y);
+            x-=0.01;
+    }
+}
+
 void desenha()
 {
+    inicia();
     backf();
     pCaca();
+    placa();
     porta();
     chao();
     telhado();
@@ -352,6 +457,8 @@ void desenha()
     faixas(X);
     carro(x,r);
     moon();
+    Letreiro();
+    glFlush();
 
 }
 
@@ -362,9 +469,8 @@ int main(int argc, char** argv)
     glutInitWindowSize(640,480);
     glutInitWindowPosition(10,10);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-    glutCreateWindow("Casa");
+    glutCreateWindow("Loja");
     glutKeyboardFunc(teclaPressionado);
-    inicia();
     glutDisplayFunc(desenha);
     glutMainLoop();
     return 0;
