@@ -6,63 +6,66 @@ using namespace std;
 #define Tam 12
 
 string Mes(int x)
-{
+{   
+    string mes;
     switch (x)
     {
     case 1:
-        return "Janeiro";
+        mes="Janeiro";
         break;
 
     case 2:
-        return "Fevereiro";
+        mes="Fevereiro";
         break;
 
     case 3:
-        return "Marco";
+        mes="Marco";
         break;
 
     case 4:
-        return "Abril";
+        mes="Abril";
         break;
 
     case 5:
-        return "Maio";
+        mes="Maio";
         break;
 
     case 6:
-        return "Junho";
+        mes="Junho";
         break;
 
     case 7:
-        return "Julho";
+        mes="Julho";
         break;
 
     case 8:
-        return "Agosto";
+        mes="Agosto";
         break;
 
     case 9:
-        return "Setembro";
+        mes="Setembro";
         break;
 
     case 10:
-        return "Outubro";
+        mes="Outubro";
         break;
 
     case 11:
-        return "Novembro";
+        mes="Novembro";
         break;
 
     case 12:
-        return "Dezembro";
+        mes="Dezembro";
         break;
     }
+
+    return mes;
 }
 
 void input(int *temp, string Mes)
 {
-    printf("Digite a Temperatura do Mes de %s: ", Mes);
-    scanf("%d", &(*temp));
+    cout << "Digite a Temperatura do Mes de " << Mes << ": ";
+    cin >> (*temp);
 }
 
 void loop(int *temp[])
@@ -110,16 +113,16 @@ void loop(int *temp[])
         }
     }
 
-    printf("Meses com a temperatura mais auta");
+    cout << "Meses com a temperatura mais Alta" << endl;
     for (int i = 1; i <= numMax; i++)
     {
-        printf("%s com %d", Mes(mesMax[i]), MaxTemp[i]);
+        cout << Mes(mesMax[i]) << " com " << MaxTemp[i] << endl;
     }
 
-    printf("Meses com a temperatura mais Baixa");
+    cout << "Meses com a temperatura mais Baixa" << endl;
     for (int i = 1; i <= numMin; i++)
     {
-        printf("%s com %d", Mes(mesMin[i]), MinTemp[i]);
+        cout << Mes(mesMin[i]) << " com " << MinTemp[i] << endl;
     }
 }
 
@@ -127,7 +130,7 @@ int main()
 {
     int temperatura[Tam];
 
-    loop(&temperatura[]);
+    loop(&temperatura);
 
     return 0;
 }
