@@ -32,7 +32,7 @@ quantidade de valores pares em X.
 * 15)Faça uma função que receba um vetor X de 20 de números reais como parâmetro
 e retorne a soma dos elementos de X.
 * 16)Crie uma função que gere e mostre os dez primeiros números primos acima de
-100.obs: fiz com 20 primeiros números
+100.obs: fiz com 100 primeiros números
 * 17)A prefeitura de uma cidade fez uma pesquisa entre seus habitantes, coletando
 dados sobre o salário e o número de filhos. Faça uma função que leia esses dados
 para um número não determinado de pessoas e retorne a média de salário da
