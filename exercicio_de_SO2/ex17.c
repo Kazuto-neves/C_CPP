@@ -39,11 +39,11 @@ void loop(float *salario, int *NumF)
 {
   int num = 0, numP = 0;
   float TotalSalario = 0, MaxSalario = 0, salarioMin;
-  printf("Digite seu salario: ");
+  printf("Digite seu salario Pessoa %d: ",numP+1);
   scanf("%f", &(*salario));
   while (*salario > 0)
   {
-    printf("Digite o numero de filhos: ");
+    printf("Digite o numero de filhos Pessoa %d: ",numP+1);
     scanf("%d", &(*NumF));
     //calculo(&num,&TotalSalario,&salarioMin,&(*NumF),&(*salario),&MaxSalario,&numP);
     num += *NumF;
@@ -51,7 +51,8 @@ void loop(float *salario, int *NumF)
     MaxSalario = (*salario > MaxSalario ? *salario : MaxSalario);
     salarioMin += (*salario < 380.00 ? 1 : 0);
     numP++;
-    printf("Digite seu salario: ");
+    printf("----------------------------------------\n");
+    printf("Digite seu salario Pessoa %d: ",numP+1);
     scanf("%f", &(*salario));
   }
   outPut(mediaSalario(TotalSalario, numP), mediaFilho(numP, num), MaxSalario, Pecentual(numP, salarioMin));

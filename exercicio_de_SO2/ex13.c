@@ -5,17 +5,18 @@ void input(int idade[], int NumF[], char Sexo[], float salario[])
 {
     for (int i = 0; i < Tam; i++)
     {
-        printf("Digite sua idade: ");
+        printf("Digite sua idade Pessoa %d: ",i+1);
         scanf("%d", &idade[i]);
         do
         {
-            printf("H ou h para homem\nou\nF ou f para mulher\nDigite: ");
+            printf("H ou h para homem\nou\nF ou f para mulher\nDigite Pessoa %d: ",i+1);
             scanf("%c", &Sexo[i]);
         } while (Sexo[i] != 'H' && Sexo[i] != 'h' && Sexo[i] != 'F' && Sexo[i] != 'f');
-        printf("Digite o numero de filhos que tem: ");
+        printf("Digite o numero de filhos que tem Pessoa %d: ",i+1);
         scanf("%d", &NumF[i]);
-        printf("Digite seu salario: ");
+        printf("Digite seu salario Pessoa %d: ",i+1);
         scanf("%f", &salario[i]);
+        printf("-----------------------------\n");
     }
 }
 
