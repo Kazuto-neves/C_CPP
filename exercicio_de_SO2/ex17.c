@@ -14,17 +14,17 @@ int mediaFilho(int NumP,int NumF){
   return NumF/NumP;
 }
 
-int Pecentual(int NumP,int numBaixo){
-  return (numBaixo*100)/NumP;
+float Pecentual(int NumP,float numBaixo){
+  return (numBaixo/NumP)*100;
 }
 
-void outPut(float MP,int MF,float Max,int Pecento){
-  printf("Media de salario: R$%.2f\nMedia de Filhos: %d\nMaior Salario: R$%.2f\nPercentual de salario menor que R$380,00: %d%%",MP,MF,Max,Pecento);
+void outPut(float MP,int MF,float Max,float Pecento){
+  printf("Media de salario: R$%.2f\nMedia de Filhos: %d\nMaior Salario: R$%.2f\nPercentual de salario menor que R$380,00: %.2f%%\n",MP,MF,Max,Pecento);
 }
 
 void loop(float *salario,int *NumF){
-  int num=0,numP=0,numBaixo;
-  float TotalSalario=0,MaxSalario=0;
+  int num=0,numP=0;
+  float TotalSalario=0,MaxSalario=0,salarioMin;
   printf("Digite seu salario: ");
   scanf("%f",&(*salario));
   while(*salario>0){
@@ -33,12 +33,12 @@ void loop(float *salario,int *NumF){
     num+=*NumF;
     TotalSalario+=*salario;
     MaxSalario=(*salario>MaxSalario?*salario:MaxSalario);
-    numBaixo+=(*salario<380.00?1:0);
+    salarioMin+=(*salario<380.00?1:0);
     numP++;
     printf("Digite seu salario: ");
     scanf("%f",&(*salario));
   }
-  outPut(mediaSalario(TotalSalario,numP),mediaFilho(numP,num),MaxSalario,Pecentual(numP,numBaixo));
+  outPut(mediaSalario(TotalSalario,numP),mediaFilho(numP,num),MaxSalario,Pecentual(numP,salarioMin));
 }
 
 int main ()

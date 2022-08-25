@@ -6,123 +6,118 @@ using namespace std;
 #define Tam 12
 
 string Mes(int x)
-{   
+{
     string mes;
     switch (x)
     {
     case 1:
-        mes="Janeiro";
+        mes = "Janeiro";
         break;
 
     case 2:
-        mes="Fevereiro";
+        mes = "Fevereiro";
         break;
 
     case 3:
-        mes="Marco";
+        mes = "Marco";
         break;
 
     case 4:
-        mes="Abril";
+        mes = "Abril";
         break;
 
     case 5:
-        mes="Maio";
+        mes = "Maio";
         break;
 
     case 6:
-        mes="Junho";
+        mes = "Junho";
         break;
 
     case 7:
-        mes="Julho";
+        mes = "Julho";
         break;
 
     case 8:
-        mes="Agosto";
+        mes = "Agosto";
         break;
 
     case 9:
-        mes="Setembro";
+        mes = "Setembro";
         break;
 
     case 10:
-        mes="Outubro";
+        mes = "Outubro";
         break;
 
     case 11:
-        mes="Novembro";
+        mes = "Novembro";
         break;
 
     case 12:
-        mes="Dezembro";
+        mes = "Dezembro";
         break;
     }
 
     return mes;
 }
 
-void input(int *temp, string Mes)
+void loop(int temperatura[])
 {
-    cout << "Digite a Temperatura do Mes de " << Mes << ": ";
-    cin >> (*temp);
-}
-
-void loop(int *temp[])
-{
-    int MaxTemp[Tam], MinTemp[Tam], mesMax[Tam], mesMin[Tam];
+    int MaxTemp[12], MinTemp[12], mesMax[12], mesMin[12];
     int numMax = 0, numMin = 0;
 
-    for (int i = 1; i <= Tam; i++)
+    for (int i = 0; i < Tam; i++)
     {
-        input(&(*temp[i]), Mes(i));
-        if (i == 1)
+        cout << "Digite a Temperatura do Mes de " << Mes(i + 1) << ": ";
+        cin >> temperatura[i];
+
+        if (i == 0)
         {
-            MaxTemp[i] = (*temp[i]);
-            MinTemp[i] = (*temp[i]);
+            MaxTemp[i] = (temperatura[i]);
+            MinTemp[i] = (temperatura[i]);
             mesMin[i] = i;
             mesMax[i] = i;
             numMax += 1;
             numMin += 1;
         }
-
-        if (MaxTemp[1] == (*temp[i]))
+        if (MaxTemp[0] == (temperatura[i]))
         {
             numMax += 1;
-            MaxTemp[numMax] = (*temp[i]);
+            MaxTemp[numMax] = (temperatura[i]);
             mesMax[numMax] = i;
         }
-        else if (MaxTemp[1] >= (*temp[i]))
+        else if (MaxTemp[0] < (temperatura[i]))
         {
-            numMax = 1;
-            MaxTemp[numMax] = (*temp[i]);
+            numMax = 0;
+            MaxTemp[numMax] = (temperatura[i]);
             mesMax[numMax] = i;
         }
 
-        if (MinTemp[1] == (*temp[i]))
+        if (MinTemp[0] == (temperatura[i]))
         {
             numMin += 1;
-            MinTemp[numMin] = (*temp[i]);
+            MinTemp[numMin] = (temperatura[i]);
             mesMin[numMin] = i;
         }
-        else if (MinTemp[1] >= (*temp[i]))
+        else if (MinTemp[0] > (temperatura[i]))
         {
-            numMin = 1;
-            MinTemp[numMin] = (*temp[i]);
+            numMin = 0;
+            MinTemp[numMin] = (temperatura[i]);
             mesMin[numMin] = i;
         }
     }
 
     cout << "Meses com a temperatura mais Alta" << endl;
-    for (int i = 1; i <= numMax; i++)
+    for (int i = 0; i <= numMax; i++)
     {
-        cout << Mes(mesMax[i]) << " com " << MaxTemp[i] << endl;
+        cout << Mes(mesMax[i]) << " com " << MaxTemp[i] << " Graus" << endl;
     }
 
     cout << "Meses com a temperatura mais Baixa" << endl;
-    for (int i = 1; i <= numMin; i++)
+    for (int i = 0; i <= numMin; i++)
     {
-        cout << Mes(mesMin[i]) << " com " << MinTemp[i] << endl;
+        cout << Mes(mesMin[i]) << " com " << MinTemp[i] << " Graus" << endl;
     }
 }
 
@@ -130,7 +125,7 @@ int main()
 {
     int temperatura[Tam];
 
-    loop(&temperatura);
+    loop(temperatura);
 
     return 0;
 }
