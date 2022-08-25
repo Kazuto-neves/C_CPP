@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define Tam 5
+#define Tam 15
 
 void input(int idade[], int NumF[], char Sexo[], float salario[])
 {
