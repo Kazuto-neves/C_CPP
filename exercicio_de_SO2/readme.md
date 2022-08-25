@@ -46,3 +46,8 @@ medidas dos outros dois)
 	* Determinar e mostrar o tipo de triângulo (equilátero, isósceles ou escaleno),
 caso as medidas formem um triângulo.
 Todas as mensagens deverão ser mostradas no programa principal.
+* 19)Faça um programa que receba a temperatura média de cada mês do ano e
+armazene-as em um vetor. O programa deverá calcular e mostrar a maior e a menor
+temperatura do ano, juntamente com o mês em que elas ocorreram (o mês deverá ser
+mostrado por extenso: 1 = janeiro; 2 = fevereiro; ...).
+OBSERVAÇÃO: Não se preocupe com empates
