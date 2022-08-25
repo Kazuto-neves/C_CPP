@@ -27,6 +27,12 @@ retorne a média aritmética desses valores.
 fatorial.
 * 12)Crie uma função que receba como parâmetro dois valores X e A, calcule e retorne
 Xa sem utilizar funções ou operadores de potência prontos.
+* 13)Foi realizada uma pesquisa entre quinze habitantes de uma região. Foram
+coletados estes dados de cada habitante: idade, sexo, salário e número de filhos. Faça
+uma função que leia esses dados armazenando-os em vetores. Depois, crie funções
+que recebam esses parâmetros e retornem a média de salário entre os habitantes, a
+menor e a maior idade do grupo e a quantidade de mulheres com três filhos que
+recebem até R$ 500,00 (utilize uma função para cada cálculo).
 * 14)Elabore uma função que receba um vetor X de 15 números inteiros e retorne a
 quantidade de valores pares em X.
 * 15)Faça uma função que receba um vetor X de 20 de números reais como parâmetro
