@@ -1,67 +1,77 @@
 #include <stdio.h>
 #define Tam 15
 
-void input(int idade[], int NumF[], char Sexo[], float salario[])
+typedef struct pessoa
+{
+    int idade;
+    char sexo;
+    float salario;
+    int numFilhos;
+} Pessoa;
+
+void lerPessoas(Pessoa *p)
 {
     for (int i = 0; i < Tam; i++)
     {
-        printf("Digite sua idade Pessoa %d: ",i+1);
-        scanf("%d", &idade[i]);
+        printf("Digite sua idade Pessoa %d: ", i + 1);
+        scanf("%d", &p[i].idade);
         do
         {
-            printf("H ou h para homem\nou\nF ou f para mulher\nDigite Pessoa %d: ",i+1);
-            scanf("%c", &Sexo[i]);
-        } while (Sexo[i] != 'H' && Sexo[i] != 'h' && Sexo[i] != 'F' && Sexo[i] != 'f');
-        printf("Digite o numero de filhos que tem Pessoa %d: ",i+1);
-        scanf("%d", &NumF[i]);
-        printf("Digite seu salario Pessoa %d: ",i+1);
-        scanf("%f", &salario[i]);
+            printf("H ou h para homem\nou\nF ou f para mulher\nDigite Pessoa %d: ", i + 1);
+            scanf("%c", &p[i].sexo);
+        } while (p[i].sexo != 'H' && p[i].sexo != 'h' && p[i].sexo != 'F' && p[i].sexo != 'f');
+        printf("Digite o numero de filhos que tem Pessoa %d: ", i + 1);
+        scanf("%d", &p[i].numFilhos);
+        printf("Digite seu salario Pessoa %d: ", i + 1);
+        scanf("%f", &p[i].salario);
         printf("-----------------------------\n");
     }
 }
 
-float media(float salario[])
+float media(Pessoa *p)
 {
     float M = 0;
     for (int i = 0; i < Tam; i++)
     {
-        M += salario[i];
+        M += p[i].salario;
     }
     return (M / Tam);
 }
 
-int IdadeMax(int idade[])
+int menorIdade(Pessoa *p)
 {
-    int Max = 0;
-    Max=idade[0];
-    for (int i = 0; i < Tam; i++)
+    int menor = p[0].idade;
+    for (int i = 1; i < Tam; i++)
     {
-        Max < idade[i] ? Max = idade[i] : Max;
+        printf("%d\n", p[i].idade);
+        if (p[i].idade < menor)
+            menor = p[i].idade;
     }
-    return (Max);
+    return menor;
 }
 
-int IdadeMin(int idade[])
+int maiorIdade(Pessoa *p)
 {
-    int Min = 0;
-    Min=idade[0];
-    for (int i = 0; i < Tam; i++)
+    int maior = p[0].idade;
+    for (int i = 1; i < Tam; i++)
     {
-        Min > idade[i] ? Min = idade[i] : Min;
+        printf("%d\n", p[i].idade);
+        if (p[i].idade > maior)
+            maior = p[i].idade;
     }
-    return (Min);
+    return maior;
 }
 
-int count(int NumF[], char Sexo[], float salario[])
+int count(Pessoa *p)
 {
     int count = 0;
     for (int i = 0; i < Tam; i++)
     {
-        if (Sexo[i] == 'F' || Sexo[i] == 'f')
+        if (p[i].sexo == 'F' || p[i].sexo == 'f')
         {
-            if (NumF[i] == 3)
+            if (p[i].numFilhos == 3)
             {
-                if (salario[i] <= 300)
+                if (p[i].salario <= 300)
                 {
                     count++;
                 }
@@ -71,26 +81,19 @@ int count(int NumF[], char Sexo[], float salario[])
     return (count);
 }
 
-void outPut(int idade[], int NumF[], char Sexo[], float salario[])
+void outPut(Pessoa *p)
 {
-    // for (int i = 0; i < Tam; i++)
-    // {
-    //     printf("Sua idade: %d\nseu sexo: %c\nNumero de filhos: %d\nSalario: R$%.2f", idade[i], Sexo[i], NumF[i], salario[i]);
-    //     printf("--------------------------------------------------------------------");
-    // }
-
-    printf("\nmedia de salario: R$%.2f\n",media(salario));
-    printf("menor idade: %d\n",IdadeMin(idade));
-    printf("maior idade: %d\n",IdadeMax(idade));
-    printf("Mulheres com 3 filhos recebendo menos de R$500.00: %d\n",count(NumF,Sexo,salario));
+    printf("\nmedia de salario: R$%.2f\n",media(p));
+    printf("menor idade: %d\n",menorIdade(p));
+    printf("maior idade: %d\n",maiorIdade(p));
+    printf("Mulheres com 3 filhos recebendo menos de R$500.00: %d\n",count(p));
 }
+
+
 
 int main()
 {
-    int idade[Tam], NumF[Tam];
-    char Sexo[Tam];
-    float salario[Tam];
-    input(idade, NumF, Sexo, salario);
-    outPut(idade, NumF, Sexo, salario);
-    return 0;
+    Pessoa p[Tam];
+    lerPessoas(p);
+    outPut(p);
 }
