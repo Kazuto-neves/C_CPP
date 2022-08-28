@@ -15,15 +15,15 @@ void lerPessoas(Pessoa *p)
     {
         printf("Digite sua idade Pessoa %d: ", i + 1);
         scanf("%d", &p[i].idade);
-        printf("Digite o numero de filhos que tem Pessoa %d: ", i + 1);
-        scanf("%d", &p[i].numFilhos);
-        printf("Digite seu salario Pessoa %d: ", i + 1);
-        scanf("%f", &p[i].salario);        
         do
         {
             printf("H ou h para homem\nou\nF ou f para mulher\nDigite Pessoa %d: ", i + 1);
             scanf("%s", &p[i].sexo);
         } while (p[i].sexo != 'H' && p[i].sexo != 'h' && p[i].sexo != 'F' && p[i].sexo != 'f');
+        printf("Digite o numero de filhos que tem Pessoa %d: ", i + 1);
+        scanf("%d", &p[i].numFilhos);
+        printf("Digite seu salario Pessoa %d: ", i + 1);
+        scanf("%f", &p[i].salario);
         printf("-----------------------------\n");
     }
 }
@@ -81,10 +81,10 @@ int count(Pessoa *p)
 
 void outPut(Pessoa *p)
 {
-    printf("\nmedia de salario: R$%.2f\n",media(p));
-    printf("menor idade: %d\n",menorIdade(p));
-    printf("maior idade: %d\n",maiorIdade(p));
-    printf("Mulheres com 3 filhos recebendo menos de R$500.00: %d\n",count(p));
+    printf("\nmedia de salario: R$%.2f",media(p));
+    printf("menor idade: %d",menorIdade(p));
+    printf("maior idade: %d",maiorIdade(p));
+    printf("Mulheres com 3 filhos recebendo menos de R$500.00: %d",count(p));
 }
 
 int main()
