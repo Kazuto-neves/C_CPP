@@ -43,7 +43,6 @@ int menorIdade(Pessoa *p)
     int menor = p[0].idade;
     for (int i = 1; i < Tam; i++)
     {
-        printf("%d\n", p[i].idade);
         if (p[i].idade < menor)
             menor = p[i].idade;
     }
@@ -55,7 +54,6 @@ int maiorIdade(Pessoa *p)
     int maior = p[0].idade;
     for (int i = 1; i < Tam; i++)
     {
-        printf("%d\n", p[i].idade);
         if (p[i].idade > maior)
             maior = p[i].idade;
     }
