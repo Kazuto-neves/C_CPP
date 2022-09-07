@@ -111,4 +111,33 @@ b) Cada processo deve imprimir o seu ID de forma separada.
 >:arrow_down:  
 >N1  
 
+```C
+#include <stdio.h>
+#include <unistd.h>
+
+int main(){
+  int input,F1,F2,F3,N1,Pai;
+  printf("Pid Pai %d\n", (int)getpid());
+  Pai=fork();
+  
+    if (Pai == 0){
+      printf("Pid F1 %d\n", (int)getpid());
+      F1 = fork();
+      if (F1 == 0){
+      printf("Pid N1 %d\n", (int)getpid());
+      N1 = fork();
+      if(N1==0){
+        printf("Pid F2 %d\n", (int)getpid());
+        F2 = fork();
+        if (F2 == 0){
+          printf("Pid F3 %d\n", (int)getpid());
+          F3 = fork();
+          }
+        }
+      }
+    }
+  scanf("%d", &input);
+  }
+  ```
+
 Questão 6 - Fazer um programa em para contabilizar quantos elementos de um vetor de 1000 posições são números pares usando 4 processos. Cada processo irá verificar uma parte do vetor. Cada processo irá passar seu resultado ao processo 0, que irá somá-lo ao resultado parcial gerado pelo 0.  
