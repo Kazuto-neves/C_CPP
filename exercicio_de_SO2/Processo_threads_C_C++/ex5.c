@@ -1,26 +1,19 @@
 #include <stdio.h>
 #include <unistd.h>
 
-int main(){
-  int input,F1,F2,F3,N1,Pai;
-  printf("Pid Pai %d\n", (int)getpid());
-  Pai=fork();
-  
-    if (Pai == 0){
-      printf("Pid F1 %d\n", (int)getpid());
-      F1 = fork();
-      if (F1 == 0){
-      printf("Pid N1 %d\n", (int)getpid());
-      N1 = fork();
-      if(N1==0){
-        printf("Pid F2 %d\n", (int)getpid());
-        F2 = fork();
-        if (F2 == 0){
-          printf("Pid F3 %d\n", (int)getpid());
-          F3 = fork();
-          }
-        }
-      }
+int main()
+{
+    int x,y;
+
+    x = fork();
+    if (x != 0){
+        x = fork();
+        if(x==0)
+          y = fork();
     }
-  scanf("%d", &input);
-  }
+    if (x != 0)
+        x = fork();
+
+    printf("ID = %d\n", getpid());
+    while (1);
+}

@@ -11,12 +11,12 @@ Questão 1 – (1,0 ponto) Com relação ao sistema operacional Linux, analise a
 a) I, apenas  
 b) II, apenas  
 c) I e III, apenas  
-d)I, II e III  
-**e) I e II, apenas**  
+**d)I, II e III**  
+e) I e II, apenas  
 
 Questão 2 – (1,0 ponto) No sistema operacional linux, o objetivo da chamada de sistema fork é permitir:  
-a) Especificar concorrência entre processos;  
-**b) Especificar paralelismo entre processos;**  
+**a) Especificar concorrência entre processos;**  
+b) Especificar paralelismo entre processos;  
 c) Comunicar processos através de mensagens;  
 d) Execução do programa em multicores e multicomputadores;  
 e) Execução de um programa através da chamada exec();  
@@ -42,13 +42,15 @@ int main()
 }
 ```
 
-a) Como fica a árvore de processos do processo inicial, com todos os filhos criados (considerando que nenhum deles terminou e que não houve falha na execução de nenhuma chamada fork())?  
+a) Como fica a árvore de processos do processo inicial, com todos os filhos criados (considerando que nenhum deles terminou e que não houve falha na execução de nenhuma chamada fork())?
 
-**processo Pai**  
-**:arrow_down:**  
-**processo X**  
-**:arrow_down:**  
-**Processo Y**  
+```bach
+a.out─┬─a.out─┬─a.out─┬─a.out───a.+
+      │       │       └─a.out
+      │       └─a.out              
+      └─a.out
+```
+
 
 b) Ao executar este trecho, quantos processos são criados, incluindo o processo inicial, assumindo que não houve falha na execução de nenhuma chamada fork()?  
 **R: 8**  
@@ -70,34 +72,16 @@ b) Cada processo deve imprimir o seu ID de forma separada.
 
 int main()
 {
-    int F1, F2, F3, Pai, input;
-    printf("Pid Pai %d\n", (int)getpid());
-    Pai = fork();
-    /*if (Pai == 0)
-    {
-        printf("Pid F1 %d\n", (int)getpid());
-        F1 = fork();
-        printf("Pid F2 %d\n", (int)getpid());
-        F2 = fork();
-        printf("Pid F3 %d\n", (int)getpid());
-        F3 = fork();
-    }*/
-    if (Pai == 0)
-    {
-        printf("Pid F1 %d\n", (int)getpid());
-        F1 = fork();
-        if (F1 == 0)
-        {
-            printf("Pid F2 %d\n", (int)getpid());
-            F2 = fork();
-            if (F2 == 0)
-            {
-                printf("Pid F3 %d\n", (int)getpid());
-                F3 = fork();
-            }
-        }
-    }
-    scanf("%d", &input);
+    int x;
+
+    x = fork();
+    if (x != 0)
+        x = fork();
+    if (x != 0)
+        x = fork();
+
+    printf("ID = %d\n", getpid());
+    while (1);
 }
 ```
 
@@ -115,29 +99,68 @@ b) Cada processo deve imprimir o seu ID de forma separada.
 #include <stdio.h>
 #include <unistd.h>
 
-int main(){
-  int input,F1,F2,F3,N1,Pai;
-  printf("Pid Pai %d\n", (int)getpid());
-  Pai=fork();
-  
-    if (Pai == 0){
-      printf("Pid F1 %d\n", (int)getpid());
-      F1 = fork();
-      if (F1 == 0){
-      printf("Pid N1 %d\n", (int)getpid());
-      N1 = fork();
-      if(N1==0){
-        printf("Pid F2 %d\n", (int)getpid());
-        F2 = fork();
-        if (F2 == 0){
-          printf("Pid F3 %d\n", (int)getpid());
-          F3 = fork();
-          }
-        }
-      }
+int main()
+{
+    int x,y;
+
+    x = fork();
+    if (x != 0){
+        x = fork();
+        if(x==0)
+          y = fork();
     }
-  scanf("%d", &input);
-  }
-  ```
+    if (x != 0)
+        x = fork();
+
+    printf("ID = %d\n", getpid());
+    while (1);
+}
+```
 
 Questão 6 - Fazer um programa em para contabilizar quantos elementos de um vetor de 1000 posições são números pares usando 4 processos. Cada processo irá verificar uma parte do vetor. Cada processo irá passar seu resultado ao processo 0, que irá somá-lo ao resultado parcial gerado pelo 0.  
+
+```C
+#include <stdio.h>
+#include <unistd.h>
+
+int v[1000];
+int total = 0;
+
+void somaPares(int Index)
+{
+    int contPar = 0;
+    int inicio = Index * 250;
+    int num = inicio;
+    int fim = (Index + 1) * 250;
+    for (int i = inicio; i < fim; i++)
+    {
+        if (num % 2 == 0)
+            contPar++;
+        num++;
+    }
+    total += contPar;
+}
+
+int main()
+{
+    int x, l = 0;
+    while (l < 4)
+    {
+        if (l == 0)
+        {
+            x = fork();
+            somaPares(l);
+        }
+        if (x != 0 && l != 0)
+        {
+            x = fork();
+            somaPares(l);
+        }
+        l++;
+    }
+
+    if (x == 0)
+        printf("Total = %d\n", total);
+    return 0;
+}
+```
