@@ -6,11 +6,10 @@ int main()
     int x,y;
 
     x = fork();
-    if (x != 0){
+    if (x == 0)
+        y = fork();
+    if (x != 0)
         x = fork();
-        if(x==0)
-          y = fork();
-    }
     if (x != 0)
         x = fork();
 
