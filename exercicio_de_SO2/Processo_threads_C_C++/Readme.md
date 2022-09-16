@@ -121,45 +121,55 @@ Questão 6 - Fazer um programa em para contabilizar quantos elementos de um veto
 ```C
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
+#include <sys/wait.h>
+#include <sys/shm.h>
 
-int v[1000];
-int total = 0;
-
-void somaPares(int Index)
+int somaPares(int index, int v[1000])
 {
-    int contPar = 0;
-    int inicio = Index * 250;
-    int num = inicio;
-    int fim = (Index + 1) * 250;
-    for (int i = inicio; i < fim; i++)
-    {
-        if (num % 2 == 0)
-            contPar++;
-        num++;
-    }
-    total += contPar;
+  int i, contPar = 0;
+  int inicio = index * 250;
+  int fim = (index + 1) * 250;
+
+  for (i = inicio; i < fim; i++)
+    if (v[i] % 2 == 0)
+      contPar++;
+  return contPar;
 }
 
 int main()
 {
-    int x, l = 0;
-    while (l < 4)
-    {
-        if (l == 0)
-        {
-            x = fork();
-            somaPares(l);
-        }
-        if (x != 0 && l != 0)
-        {
-            x = fork();
-            somaPares(l);
-        }
-        l++;
-    }
+  int x = 1, i, v[1000], *soma;
+  // Cria memória compartilhada
+  // IPC_Private = somente processos filhos podem acessar
+  // Size = Tamanho da memória
+  // Perimssões = Leitura e escrita para processos
+  int shmid = shmget(IPC_PRIVATE, 100, 0600);
+  // compartilhando a var SOMA
+  soma = shmat(shmid, 0, 0);
+  *soma = 0;
 
+  for (i = 0; i < 1000; i++)
+    v[i] = i;
+
+  for (i = 0; i < 3; i++)
+  {
+    x = fork();
     if (x == 0)
-        printf("Total = %d\n", total);
-    return 0;
+    {
+      *soma += somaPares(i, v);
+      exit(0);
+    }
+  }
+  *soma += somaPares(i, v);
+  // Processo pai eserando pelo término dos processos filhos
+  for (i = 0; i < 3; i++)
+    wait(NULL);
+  printf("Soma Total = %d\n", *soma);
+  // Variável deixa de ser compartilhada
+  shmdt(soma);
+  // Apaga a área de memória compartilhada
+  shmctl(shmid, IPC_RMID, 0);
+  return 0;
 }
 ```
