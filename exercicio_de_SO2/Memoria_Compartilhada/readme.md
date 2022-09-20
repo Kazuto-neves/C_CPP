@@ -23,8 +23,8 @@ int main()
     char* Msg = shmat(shmid, 0, 0);
     if (x != 0)
     {
-        x = fork();
         printf("Antes Mensagem = %s\n", Msg);
+        x = fork();
     }
     if (x == 0)
     {
