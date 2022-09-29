@@ -30,41 +30,36 @@ int main(int argc, char *argv[])
 
     if (id == 0)
     {
-        soma += somaPares(id, v);
-        printf("id 0-%d\n", somaPares(id, v));
-        MPI_Send(&soma, 1, MPI_INT, 1, 0, MPI_COMM_WORLD);
-        // MPI_Send(&soma, 1, MPI_INT, 3, 0, MPI_COMM_WORLD);
+        soma=somaPares(id, v);
+        printf("id 0-%d\n", soma);
+        MPI_Send(&soma, 1, MPI_INT, 3, 0, MPI_COMM_WORLD);
     }
 
     if (id == 1)
     {
-        soma += somaPares(id, v);
-        printf("id 1-%d\n", somaPares(id, v));
-        MPI_Status st;
-        MPI_Recv(&soma, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, &st);
-        MPI_Send(&soma, 1, MPI_INT, 1, 0, MPI_COMM_WORLD);
-        // MPI_Send(&soma, 1, MPI_INT, 3, 0, MPI_COMM_WORLD);
+        soma=somaPares(id, v);
+        printf("id 1-%d\n", soma);
+        MPI_Send(&soma, 1, MPI_INT, 3, 0, MPI_COMM_WORLD);
     }
 
     if (id == 2)
     {
-        soma += somaPares(id, v);
-        printf("id 2-%d\n", somaPares(id, v));
-        MPI_Status st;
-        MPI_Recv(&soma, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, &st);
-        MPI_Send(&soma, 1, MPI_INT, 1, 0, MPI_COMM_WORLD);
-        // MPI_Send(&soma, 1, MPI_INT, 3, 0, MPI_COMM_WORLD);
+        soma=somaPares(id, v);
+        printf("id 2-%d\n", soma);
+        MPI_Send(&soma, 1, MPI_INT, 3, 0, MPI_COMM_WORLD);
     }
 
     if (id == 3)
     {
-        soma += somaPares(id, v);
-        printf("id 3-%d\n", somaPares(id, v));
-        printf("Soma Total = %d\n", soma);
+        soma=somaPares(id, v);
+        printf("id 3-%d\n", soma);
+        int s0=0,s1=0,s2=0,s3=0;
+        s3=soma+s0,s1,s2;
         MPI_Status st;
         MPI_Recv(&soma, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, &st);
-        // MPI_Recv(&soma, 1, MPI_INT, 1, 0, MPI_COMM_WORLD, &st);
-        // MPI_Recv(&soma, 1, MPI_INT, 2, 0, MPI_COMM_WORLD, &st);
+        MPI_Recv(&soma, 1, MPI_INT, 1, 0, MPI_COMM_WORLD, &st);
+        MPI_Recv(&soma, 1, MPI_INT, 2, 0, MPI_COMM_WORLD, &st);
+        printf("Soma total: %d\n", s3);
     }
     MPI_Finalize();
 }
