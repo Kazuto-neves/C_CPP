@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1650841329 source:c:\users\kazuto\documents\cbglut\t\main.c
+	<stdio.h>
+	<pthread.h>
+
